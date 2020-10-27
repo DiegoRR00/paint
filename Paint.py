@@ -8,6 +8,7 @@ def line(start, end):
     goto(start.x, start.y)#Posiciona el inicio de la línea en las coordenadas start
     down()#Inicia una nueva línea
     goto(end.x, end.y)#Dibuja una línea a las ccordenadas finales
+
 #Dibuja un cuadrado cuyo lado es del tamaño de la diferencia entre las coordenadas x de start y end
 def square(start, end):
     "Draw square from start to end."
@@ -22,11 +23,17 @@ def square(start, end):
 
     end_fill()#Terminar figura
 
-def circle(start, end):
-    "Draw circle from start to end."
-    pass  # TODO
-
 #Dibujo un círculo con altura de la diferencia entre las coordenadas en y & un ancho de la diferencia entre las coordenadas en x
+def circles(start, end):
+    "Draw circle from start to end."
+    up() #Deja de dibujar la línea actual
+    goto(start.x, start.y) #Posiciona el inicio de la línea en las coordenadas start
+    down() #Inicia una nueva línea
+    begin_fill()#Iniciar una figura
+    circle(end.x - start.x) #Iniciar una figura con el radio elegido
+    end_fill()#Terminar figura
+
+#Dibuja un rectangulo
 def rectangle(start, end):
     "Draw rectangle from start to end."
     up()#Deja de dibujar la línea actual
@@ -40,6 +47,7 @@ def rectangle(start, end):
         forward(sizes[i%2])#Elegir las longitudes de forma alternada
         left(90)#Girrar a la izquierda
     end_fill()#Terminar figura
+
 #Dibujo un triángulo recto, cuyos lados iguales son la diferencia entre las coordenadas en x de start y end
 def triangle(start, end):
     "Draw triangle from start to end."
@@ -55,6 +63,7 @@ def triangle(start, end):
         forward(sizes[i])#Elegir la longitud correspondiente
         left(angles[i])#Gira a la izquierda con el ángulo correspondiente
     end_fill()#Terminar figura
+
 #Guarda la posición del mouse cuando se de click
 def tap(x, y):
     "Store starting point or draw shape."
@@ -84,6 +93,8 @@ onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
 onkey(lambda: color('yellow'),'Y')
+onkey(lambda: color('pink'),'P')
+
 #Cambios de figura
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
