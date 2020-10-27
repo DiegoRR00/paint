@@ -25,14 +25,35 @@ def circle(start, end):
     "Draw circle from start to end."
     pass  # TODO
 
+#Dibujo un círculo con altura de la diferencia entre las coordenadas en y & un ancho de la diferencia entre las coordenadas en x
 def rectangle(start, end):
     "Draw rectangle from start to end."
-    pass  # TODO
-
+    up()#Deja de dibujar la línea actual
+    goto(start.x, start.y)#Posiciona el inicio de la línea en las coordenadas start
+    down()#Inicia una nueva línea
+    sizes=[end.x-start.x,
+           end.y-start.y] #Un array con las posibles longitudes
+    begin_fill()#Iniciar una figura
+    #Dibuja cada uno de los lados
+    for i in range(4):
+        forward(sizes[i%2])#Elegir las longitudes de forma alternada
+        left(90)#Girrar a la izquierda
+    end_fill()#Terminar figura
+#Dibujo un triángulo recto, cuyos lados iguales son la diferencia entre las coordenadas en x de start y end
 def triangle(start, end):
     "Draw triangle from start to end."
-    pass  # TODO
-
+    up()#Deja de dibujar la línea actual
+    goto(start.x, start.y)#Posiciona el inicio de la línea en las coordenadas start
+    down()#Inicia una nueva línea
+    sizes=[end.x-start.x,
+           end.x-start.x,
+           (end.x-start.x)*(2**(1/2))] #Un array con las posibles longitudes
+    angles=[90,45+90,90] #Un array con los posibles ángulos
+    begin_fill()#Iniciar una figura
+    for i in range(3):
+        forward(sizes[i])#Elegir la longitud correspondiente
+        left(angles[i])#Gira a la izquierda con el ángulo correspondiente
+    end_fill()#Terminar figura
 def tap(x, y):
     "Store starting point or draw shape."
     start = state['start']
